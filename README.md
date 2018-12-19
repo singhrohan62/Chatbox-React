@@ -13,14 +13,8 @@ the trending frontend framework.
 
 ```sh
 Clone the project
-For starting the server:
-$ cd ChatBox-React
-$ cd server
 $ npm i
-$ node index.js
-
-For starting the application
-$ cd ChatBox-React
-$ cd chatbox-expreact
-$ npm i
+To start the server
+$node server.js
+To run the client
 $ npm start
