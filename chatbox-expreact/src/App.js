@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import socketIOClient from 'socket.io-client';
 import './App.css';
 
-const socket = socketIOClient.connect("http://10.30.81.13:4001")
+const socket = socketIOClient.connect("http://192.168.43.167:4001")
 
 class App extends Component {
 
