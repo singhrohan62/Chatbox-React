@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import socketIOClient from 'socket.io-client';
 import './App.css';
 
-const socket = socketIOClient.connect("http://192.168.43.167:4001")
+const socket = socketIOClient.connect("localhost:4001")
 
 class App extends Component {
 
@@ -44,7 +44,8 @@ class App extends Component {
     this.msgInput.value ='';
   }
 
-  sendMessage = () => {
+  sendMessage = (e) => {
+    e.preventDefault();
     console.log(this.msgInput.value);
     socket.emit('Chat Message', this.state.messageSent,this.state.username);
   }
@@ -53,8 +54,9 @@ class App extends Component {
     return (
         <div className="App">
           <h2>LoginBoxRendering</h2>
-            <input type="text" placeholder="Eg: Hajmola" onChange={(event) => this.setState({username: event.target.value})} value={this.state.username}/>
-            <button onClick={() => this.sendUsername()}>Go!</button>
+            <form onSubmit={this.sendUsername}>
+              <input type="text" placeholder="Eg: Hajmola" onChange={(event) => this.setState({username: event.target.value})} value={this.state.username}/>
+            </form> 
         </div>
       )
   }
@@ -64,9 +66,9 @@ class App extends Component {
       <div className="App"><h2>RenderingChatWindow</h2>
           <h4>Welcome {this.state.username}</h4>
           <h5>Connected USers: {this.state.users} </h5>
-          
-            <input type="text" ref={(input) => {this.msgInput=input;}} onChange={(event) => this.setState({messageSent: event.target.value})} value={this.state.messageSent}/>
-            <button onClick={() => this.sendMessage()}>Send</button>
+            <form onSubmit={this.sendMessage}>
+              <input type="text" ref={(input) => {this.msgInput=input;}} onChange={(event) => this.setState({messageSent: event.target.value})} value={this.state.messageSent}/>
+              </form>
           <h5>Chats</h5>
           <h5>{this.state.usermsgs}</h5>
       </div>
